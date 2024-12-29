@@ -1,0 +1,166 @@
+# WHATWG
+Khả năng tương thích Mức sống — Cập nhật lần cuối24 tháng 1 năm 2024
+Tham gia: GitHub whatwg/compat ( vấn đề mới,vấn đề mở)
+1. Giới thiệu
+Phần này không mang tính chuẩn mực.
+Có một khối lượng nội dung web ngày càng lớn phụ thuộc vào trình duyệt web hỗ trợ một số thuộc tính CSS và API DOM của nhà cung cấp cụ thể cho chức năng hoặc bố cục. Điều này đặc biệt đúng đối với nội dung web được tối ưu hóa cho thiết bị di động, phụ thuộc rất nhiều vào - webkit- các thuộc tính có tiền tố -.
+
+Mục đích của đặc tả này là mô tả tập hợp tối thiểu - webkit- các thuộc tính CSS có tiền tố - và API DOM mà các tác nhân người dùng phải hỗ trợ để tương thích với web, những đặc điểm này không được chỉ định ở nơi khác.
+
+Trường tiêu đề HTTP User-Agentđược tìm thấy trong các trình duyệt chính hiện nay cũng được mô tả.
+
+2. Sự phù hợp
+Tất cả các sơ đồ, ví dụ và ghi chú trong đặc tả này đều không mang tính chuẩn mực, cũng như tất cả các phần được đánh dấu rõ ràng là không mang tính chuẩn mực. Mọi thứ khác trong đặc tả này đều mang tính chuẩn mực.
+Các từ khóa " PHẢI", " KHÔNG ĐƯỢC", " BẮT BUỘC", " SẼ", " SẼ KHÔNG", " NÊN", " KHÔNG NÊN", " ĐƯỢC KHUYẾN NGHỊ", " KHÔNG ĐƯỢC KHUYẾN NGHỊ", " CÓ THỂ" và " TÙY CHỌN" trong tài liệu này phải được hiểu như mô tả trong #RFC #2119. Để dễ đọc, các từ này không xuất hiện bằng tất cả các chữ cái viết hoa trong đặc tả này.[ RFC2119]
+
+Các yêu cầu được diễn đạt theo dạng mệnh lệnh như một phần của thuật toán (chẳng hạn như "bỏ bất kỳ ký tự khoảng trắng nào ở đầu" hoặc " trả về giá trị sai và chấm dứt các bước này") phải được hiểu theo nghĩa của từ khóa (" phải", " nên" , " có thể" , v.v.) được sử dụng khi giới thiệu thuật toán.
+Các yêu cầu về sự phù hợp được diễn đạt dưới dạng thuật toán hoặc các bước cụ thể có thể được triển khai theo bất kỳ cách nào, miễn là kết quả cuối cùng là tương đương. ( Đặc biệt , các thuật toán được xác định trong thông số kỹ thuật này có mục đích là dễ thực hiện và không có mục đích là hiệu suất cao.)
+3. Khả năng tương thích với CSS
+3.1. Quy tắc CSS
+Các nhà cung cấp sau đây -webkit- có tiền tố at-rules phải được hỗ trợ dưới dạng bí danh của các at-rules không có tiền tố tương ứng :
+
+- webkit- bí danh theo quy tắc có tiền tố	không có tiền tố theo quy tắc
+@-webkit- keyframes	@keyframes
+3.2. Truy vấn phương tiện CSS
+3.2.1. -webkit-device-pixel-ratio
+Tên:	-webkit-device-pixel-ratio
+Vì:	@phương tiện truyền thông
+Giá trị:	<số>
+Kiểu:	phạm vi
+-webkit-device-pixel-ratiophải được coi là bí danh của resolutionloại phạm vi tính năng phương tiện , với giá trị của nó được diễn giải là một đơn vị dppx .
+
+Tiền tố min-hoặc max- trên các đối tượng phạm vi không được áp dụng cho -webkit-device-pixel-ratio, thay vào đó phải sử dụng các bí danh sau:
+3.3. Hàm Gradient CSS
+3.3.1. -webkit-linear-gradient()
+Hàm -webkit-linear-gradient() gradient phải được coi là một bí danh của linear-gradient như được định nghĩa trong [css3-images-20110217] .
+
+3.3.2. -webkit-radial-gradient()
+Hàm -webkit-radial-gradient() gradient phải được coi là một bí danh của radial-gradient như được định nghĩa trong [css3-images-20110217] .
+
+3.3.3. -webkit-repeating-linear-gradient()
+Hàm -webkit-repeating-linear-gradient() gradient phải được coi là một bí danh của repeat-linear-gradient như được định nghĩa trong [css3-images-20110217] .
+
+3.3.4. -webkit-repeating-radial-gradient()
+Hàm -webkit-repeating-radial-gradient() gradient phải được coi là một bí danh của repeat-radial-gradient như được định nghĩa trong [css3-images-20110217] .
+3.4.2. Bí danh tên kế thừa có tiền 
+-webkit-bí danh thuộc tính có tiền tố	(tiền tố nhà cung cấp) tài sản
+-webkit-text-size-adjust	(-prefix-)text-size-adjust
+Ví dụ, -webkit-text-size-adjustđược coi là bí danh của -moz-text-size-adjusttrong Firefox.
+Lưu ý: Ngay khi mỗi thuộc tính không thể thêm tiền tố, nó có thể được định nghĩa là bí danh tên cũ .
+
+3.4.3. Thuộc tính tiền tố nhà cung cấp không có bí danh
+Lưu ý: Phần này được sử dụng để chỉ định thuộc tính -webkit-appearance . Thuộc tính này hiện được định nghĩa trong CSS Basic User Interface Module .
+
+
+  -webkit-text-fill-color: màu hiện tại; */
+}
+
+.hai{
+  màu sắc:màu đỏ;
+  -webkit-text-fill-color:màu xanh da trời;
+}
+Các phần tử có lớp onehoặc twosẽ có văn bản màu xanh.
+
+
+3.5. Giá trị thuộc tính CSS
+3.5.1. Các giá trị bổ sungtouch-action
+Phần này bổ sung định nghĩa củatouch-action from [pointerevents2] để thêm giá pinch-zoomtrị.
+
+Tên:	hành động chạm
+Giá trị:	tự động | không có | [ [ pan-x | pan-trái | pan-phải ] || [ pan-y | pan-lên | pan-xuống ] || chụm-thu phóng ] | thao tác
+Ban đầu:	tự động
+Áp dụng cho:	tất cả các phần tử ngoại trừ: các phần tử nội tuyến không được thay thế, hàng bảng, nhóm hàng, cột bảng và nhóm cột.
+Được thừa hưởng:	KHÔNG
+Phần trăm:	Không có
+Giá trị tính toán:	Giống như giá trị đã chỉ định
+Thứ tự chuẩn:	theo ngữ pháp
+Loại hoạt hình:	không thể hoạt hình
+Phương tiện truyền thông:	thị giác
+Khi được chỉ định, pinch-zoommã thông báo cho phép di chuyển và thu phóng nhiều ngón tay trên trang. Để thu phóng xảy ra, tất cả các ngón tay phải bắt đầu trên một phần tử có hành vi thu phóng bằng cách chụm ngón tay (thông qua một trong các giá trị pinch-zoom, manipulation, hoặc autotrên chính nó hoặc một phần tử tổ tiên).
+
+Các tình huống như băng chuyền hình ảnh muốn tắt chế độ xoay ngang có thể sử dụng " touch-action: pan-y pinch-zoom" để tránh tắt chế độ thu phóng không cần thiết.
+manipulationlà bí danh của " pan-x pan-y pinch-zoom".
+
+4. Khả năng tương thích DOM
+4.1. Giao diện WebKitCSSMatrix
+Lưu ý: WebKitCSSMatrix hiện được xác định bởi đặc tả Hình học DOM. [geometry-1] .
+
+4.2. Giao diện lập trình ứng dụng window.orientation
+một phần giao diện Cửa sổ{
+    chỉ đọc thuộc tính ngắn định hướng;
+    thuộc tính Trình xử lý sự kiện onorientationchange; một phần giao diện Phần tử HTMLBody{ thuộc tính Trình xử lý sự kiện onorientationchange}
+Khi lấy orientationthuộc tính, tác nhân người dùng phải chạy các bước sau:
+Đặt document là đối tượng toàn cục có liên quan của Document .
+
+Trả về góc hiện tại của tài liệu .window.orientation
+
+Bất cứ khi nào khung nhìn được vẽ ở một góc khác so với hướng tự nhiên của thiết bị, tác nhân người dùng phải chạy các bước sau:
+
+Kích hoạt sự kiện được đặt tên orientationchangetại Windowđối tượng của tài liệu đang hoạt động .
+
+Các tác nhân người dùng triển khai window.orientationthuộc tính và sự kiện orientationchange liên quan không được phép hiển thị chúng trên các nền tảng không phải là thiết bị di động.
+
+iOS Safari cũng kích hoạt orientationchangesự kiện trên bodyphần tử này, nhưng các triển khai khác thì không, cho thấy điều này không cần thiết để tương thích với web.
+4.2.1. góc window.orientation
+Các giá trị số nguyên có thể có cho window.orientationgóc là: -90, 0, 90, 180. Các tác nhân người dùng phải hỗ trợ các giá trị -90, 0và 90và có thể tùy chọn hỗ trợ 180.
+
+0biểu thị hướng tự nhiên. -90biểu thị phép quay 90 độ theo chiều kim đồng hồ so với hướng tự nhiên. 90biểu thị phép quay 90 độ ngược chiều kim đồng hồ so với hướng tự nhiên. 180biểu thị phép quay 180 độ so với hướng tự nhiên.
+
+Để xác định window.orientationgóc hiện tại, tác nhân người dùng phải chạy các bước sau:
+
+Đặt orientationAngle là góc định hướng hiện tại .
+Nếu orientationAngle nhỏ hơn 180, hãy trả về orientationAngle .
+Nếu orientationAngle là 180 và trình duyệt người dùng hỗ trợ giá trị đó, hãy trả về orientationAngle , nếu không, hãy trả về 0.
+Nếu orientationAngle lớn hơn 180, trả về orientationAngle - 360.
+4.2.2. Trình xử lý sự kiện trên Windowcác đối tượng và bodyphần tử
+Sau đây là các trình xử lý sự kiện và các loại sự kiện xử lý sự kiện tương ứng phải được hỗ trợ trên tất cả Windowcác đối tượng và bodyphần tử dưới dạng thuộc tính:
+
+event handler	trình xử lý sự kiện loại sự kiện
+onorientationchange	orientationchange
+5. Chuỗi User-Agent
+Cú User-Agentpháp trường tiêu đề được định nghĩa chính thức bởi [HTTP-SEMANTICS] và cung cấp hướng dẫn cấp độ NÊN về giá trị của nó. Phần này đóng vai trò là bản ghi mô tả về User-Agentcác mẫu được tìm thấy trong cái gọi là trình duyệt web chính, nhưng phần lớn sẽ áp dụng cho các trình duyệt khác có chung di sản (tức là, fork và embedder) cũng như bất kỳ tác nhân người dùng nào theo nghĩa chung hơn gửi User-Agent tiêu đề .
+
+5.1. Mã thông báo tác nhân người dùng
+Mã thông báo User-Agent là một chuỗi biểu diễn một sự trừu tượng hóa trên một đơn vị ngữ nghĩa trong User-Agentchuỗi. Tài liệu này chính thức hóa một mã thông báo thành một chuỗi bắt đầu bằng dấu ngoặc mở "<" và kết thúc bằng dấu ngoặc đóng ">", ví dụ: <version>. Một mã thông báo cũng có thể chứa các mã thông báo khác .
+
+Hằng User-Agent là một chuỗi có giá trị không thay đổi.
+
+Khi giá trị của một mã thông báo được tạo thành từ một hoặc nhiều mã thông báo và tùy chọn là các hằng số , thì nó được gọi là phân tích thành các mã thông báo và hằng số đó .
+
+5.1.1. Tham chiếu mã thông báo tác nhân người dùng
+Đây là danh sách không đầy đủ các mã thông báo User-Agent phổ biến .
+
+Mã thông báo	Sự miêu tả
+<deviceCompat>	Biểu thị dạng thức của thiết bị. Về cơ bản, đây là " Mobile " hoặc chỉ là chuỗi rỗng, dành cho máy tính để bàn hoặc thiết bị không phải di động. Một số trình duyệt cũng đã gửi các giá trị mã thông báo như " Tablet", " TV", " Mobile VR", v.v. hoặc bao gồm cả thông tin xây dựng.
+<majorVersion>	Biểu thị số phiên bản chính của trình duyệt.
+<minorVersion>	Biểu thị số phiên bản không chính của trình duyệt.
+<oscpu>	Biểu thị hệ điều hành của thiết bị và (tùy chọn) kiến trúc CPU.
+<platform>	Biểu thị nền tảng thiết bị cơ bản.
+
+
+5.4. Trình duyệt Firefox
+5.4.1. Mẫu Firefox User-Agent
+" "Mozilla/5.0 (<firefoxPlatform>; rv: <firefoxVersion>) Gecko/<geckoVersion> Firefox/<firefoxVersion>
+Máy tính để bàn : " " Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:100.0) Gecko/20100101 Firefox/100.0
+Di động : " "Mozilla/5.0 (Android 10; Mobile; rv:100.0) Gecko/100.0 Firefox/100.0
+Lời cảm ơn
+Xin cảm ơn Alan Cutter, Cameron McCormack, Chris Rebert, Chun-Min (Jeremy) Chen, Daniel Holbert, David Håsäther, Domenic Denicola, Eric Portis, hexalys, Jean-Yves Perrier, Jacob Rossi, Karl Dubost, Philip Jägenstedt, Rick Byers, Simon Pieters, Stanley Stuart, William Chen và Your Name Here đã phản hồi và đóng góp cho tiêu chuẩn này.
+Cảm ơn Mounir Lamouri và Marcos Cáceres đã xác định ScreenOrientationgiao diện. [screen-orientation]
+
+Xin gửi lời cảm ơn đặc biệt đến Apple và tác giả blog WebKit.org đã cung cấp những mô tả ban đầu về phần lớn nội dung được định nghĩa trong thông số kỹ thuật này.
+
+Tiêu chuẩn này được biên soạn bởi Mike Taylor ( Google , miketaylr@google.com ).
+
+Quyền sở hữu trí tuệ
+Bản quyền © WHATWG (Apple, Google, Mozilla, Microsoft). Tác phẩm này được cấp phép theo Giấy phép Creative Commons Ghi công 4.0 Quốc tế . Trong phạm vi các phần của tác phẩm được đưa vào mã nguồn, các phần đó trong mã nguồn được cấp phép theo Giấy phép BSD 3-Clause .
+
+Đây là Living Standard. Những ai quan tâm đến phiên bản đánh giá bằng sáng chế nên xem Bản thảo đánh giá Living Standard .
+https://compat.spec.whatwg.org/#index
+https://compat.spec.whatwg.org/#index-defined-here
+https://compat.spec.whatwg.org/#index-defined-elsewhere
+https://compat.spec.whatwg.org/#references
+https://compat.spec.whatwg.org/#informative
+https://compat.spec.whatwg.org/#property-index
+https://compat.spec.whatwg.org/#media-descriptor-table
+https://compat.spec.whatwg.org/#idl-index
+
